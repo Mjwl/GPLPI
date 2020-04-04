@@ -7,18 +7,13 @@ import os
 import itertools
 import collections
 import math
-#import batch_norm
 import binary_connect
 import matplotlib.pyplot as plt
 from lpproj import LocalityPreservingProjection 
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
-#from sklearn.feature_selection import CorrelationThreshold
 from sklearn.manifold import LocallyLinearEmbedding
 from pyswarm import pso as ps
-#from pyswarms.single.local_best import LocalBestPSO
-#import pyswarms as ps
-#from pyswarms.utils.functions import single_obj as fx
-from sklearn import svm#, grid_search
+from sklearn import svm
 from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier, GradientBoostingClassifier, ExtraTreesClassifier     
@@ -26,7 +21,6 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 from sklearn.linear_model import LogisticRegression
-#from logisticRegressionClassifier import LogisticRegression
 import lightgbm as lgb
 import catboost
 from sklearn.decomposition import PCA
@@ -38,11 +32,8 @@ from tensorflow.contrib import rnn
 from tensorflow.contrib.crf.python.ops import crf
 import sklearn_crfsuite
 from sklearn_crfsuite import CRF, scorers, metrics
-#from model.lstm import BiLstm
-#from sklearn.cross_validation import train_test_split
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.calibration import CalibratedClassifierCV
-#from sklearn.cross_validation import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_curve, auc, f1_score
 from sklearn.metrics import precision_recall_curve
@@ -66,9 +57,6 @@ from keras.layers.embeddings import Embedding
 from keras.layers import containers
 from keras import regularizers
 from keras.constraints import maxnorm, unitnorm
-from attention import Attention,myFlatten
-from graph_cnn_layer import GraphCNN
-from graph_attention_layer2 import GraphAttentionLayer
 from graph_attention_layer import GraphAttention
 
 ALPHABET='ACGU'
@@ -710,9 +698,9 @@ def multiple_layer_autoencoder(X_train, X_test, activation = 'linear', batch_siz
     F_ = 8                        # Output size of first GraphAttention layer
     n_attn_heads = 8              # Number of attention heads in first GAT layer
     dropout_rate = 0.6            # Dropout rate (between and inside GAT layers)
-    l2_reg = 5e-4/2               # Factor for l2 regularization
-    learning_rate = 5e-3          # Learning rate for Adam
-    epochs = 10000                # Number of training epochs
+    l2_reg = 5e-4/2               
+    learning_rate = 5e-3         
+    epochs = 10000                
     es_patience = 100             # Patience fot early stopping
 
     for i, (n_in, n_out) in enumerate(zip(nb_hidden_layers[:-1], nb_hidden_layers[1:]), start=1):
